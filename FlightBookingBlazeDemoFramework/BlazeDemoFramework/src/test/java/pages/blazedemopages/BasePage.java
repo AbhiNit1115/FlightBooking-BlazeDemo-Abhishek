@@ -1,0 +1,22 @@
+package pages;
+
+import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.BeforeSuite;
+
+
+public abstract class BasePage {
+
+    public WebDriver driver;
+    private static Logger _log = LoggerFactory.getLogger(BasePage.class);
+
+    public BasePage(WebDriver driver){
+        this.driver = driver;
+    }
+
+    @BeforeSuite(alwaysRun = true)
+    void Config() {
+        ConfigWriter.setPropertyValue("logger.file", "webLogger", ConfigReader.get("config.path"));
+    }
+}
